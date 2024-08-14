@@ -19,10 +19,17 @@ namespace Interfaz
         {
             InitializeComponent();
             equipoTemp = new Equipo();
+            ActualizarListaDTs();
         }
 
         private void btnGuardarEquipo_Click(object sender, EventArgs e)
         {
+            equipoTemp.Nombre = txtNombreEquipo.Text;
+            equipoTemp.Siglas = txtSiglasEquipo.Text;
+            equipoTemp.Color1 = txtColor1Equipo.Text;
+            equipoTemp.Color2 = txtColor2Equipo.Text;
+            equipoTemp.DNI_DirectorTecnico = Logica.ListaDT[comboBoxDTEquipo.SelectedIndex].DNI;
+
             Logica.ListaEquipos.Add(equipoTemp);
         }
 
@@ -36,17 +43,27 @@ namespace Interfaz
                 int.Parse(txtNroGoles.Text));
 
             equipoTemp.ListaJugadores.Add(jugador);
-            actualizarListaJugadores();
+            ActualizarListaJugadores();
 
         }
 
-        private void actualizarListaJugadores()
+        private void ActualizarListaJugadores()
         {
             listBoxJugadoresEquipo.Items.Clear();
             foreach (Jugador jugador in equipoTemp.ListaJugadores)
             {
                 listBoxJugadoresEquipo.Items.Add(jugador.Dorsal + " | " + jugador.Apellido + ", " + jugador.Nombre);
 
+            }
+        }
+
+        private void ActualizarListaDTs()
+        {
+            comboBoxDTEquipo.Items.Clear();
+           if (Logica.ListaDT == null) return;
+           foreach (DirectorTecnico dt in Logica.ListaDT)
+            {
+                comboBoxDTEquipo.Items.Add(dt.Apellido + ", " + dt.Nombre);
             }
         }
 
@@ -57,7 +74,7 @@ namespace Interfaz
 
             if (idJugadorSeleccionado == -1) return;
             equipoTemp.ListaJugadores.RemoveAt(idJugadorSeleccionado);
-            actualizarListaJugadores();
+            ActualizarListaJugadores();
         }
 
         private void btnAgregarDT_Click(object sender, EventArgs e)

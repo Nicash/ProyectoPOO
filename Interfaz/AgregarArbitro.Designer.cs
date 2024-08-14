@@ -61,6 +61,7 @@
             btnAgregarArbitro.TabIndex = 8;
             btnAgregarArbitro.Text = "Agregar";
             btnAgregarArbitro.UseVisualStyleBackColor = true;
+            btnAgregarArbitro.Click += btnAgregarArbitro_Click;
             // 
             // groupBox1
             // 
@@ -161,7 +162,7 @@
             lblListadoArbitros.TabIndex = 5;
             lblListadoArbitros.Text = "Listado de Árbitros";
             // 
-            // Form1
+            // AgregarArbitro
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -171,8 +172,8 @@
             Controls.Add(groupBox1);
             Controls.Add(lstListaArbitros);
             Controls.Add(lblListadoArbitros);
-            Name = "Form1";
-            Text = "Form1";
+            Name = "AgregarArbitro";
+            Text = "Agregar Árbitro";
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ResumeLayout(false);

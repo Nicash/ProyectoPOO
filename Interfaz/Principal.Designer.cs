@@ -41,7 +41,7 @@
             lblAgregarDT = new Button();
             lblAgregarArbitro = new Button();
             groupBoxArbitros = new GroupBox();
-            label1 = new Label();
+            lblNroCarnetArbitro = new Label();
             lblDNIArbitro = new Label();
             lblNombreApellidoArbitro = new Label();
             listBoxArbitros = new ListBox();
@@ -51,6 +51,11 @@
             lblNombreYApellidoDT = new Label();
             listBoxDTs = new ListBox();
             btnGuardarTodo = new Button();
+            btnVerEquipos = new Button();
+            btnVerJugadores = new Button();
+            btnVerArbitros = new Button();
+            btnVerDTs = new Button();
+            btnVerGoleadores = new Button();
             groupBoxEquipoActual.SuspendLayout();
             groupBoxArbitros.SuspendLayout();
             groupBoxDTs.SuspendLayout();
@@ -58,9 +63,9 @@
             // 
             // lblListadoEquipos
             // 
-            lblListadoEquipos.Location = new Point(12, 9);
+            lblListadoEquipos.Location = new Point(12, 24);
             lblListadoEquipos.Name = "lblListadoEquipos";
-            lblListadoEquipos.Size = new Size(120, 23);
+            lblListadoEquipos.Size = new Size(240, 23);
             lblListadoEquipos.TabIndex = 0;
             lblListadoEquipos.Text = "Listado de Equipos";
             lblListadoEquipos.TextAlign = ContentAlignment.MiddleCenter;
@@ -69,14 +74,15 @@
             // 
             listBoxEquipos.FormattingEnabled = true;
             listBoxEquipos.ItemHeight = 15;
-            listBoxEquipos.Location = new Point(12, 35);
+            listBoxEquipos.Location = new Point(12, 50);
             listBoxEquipos.Name = "listBoxEquipos";
-            listBoxEquipos.Size = new Size(120, 319);
+            listBoxEquipos.Size = new Size(240, 304);
             listBoxEquipos.TabIndex = 1;
+            listBoxEquipos.SelectedIndexChanged += listBoxEquipos_SelectedIndexChanged;
             // 
             // btnAgregarEquipo
             // 
-            btnAgregarEquipo.Location = new Point(12, 360);
+            btnAgregarEquipo.Location = new Point(132, 360);
             btnAgregarEquipo.Name = "btnAgregarEquipo";
             btnAgregarEquipo.Size = new Size(120, 23);
             btnAgregarEquipo.TabIndex = 2;
@@ -93,7 +99,7 @@
             groupBoxEquipoActual.Controls.Add(lblColores);
             groupBoxEquipoActual.Controls.Add(lblDatosDT);
             groupBoxEquipoActual.Controls.Add(lblDT);
-            groupBoxEquipoActual.Location = new Point(138, 34);
+            groupBoxEquipoActual.Location = new Point(258, 40);
             groupBoxEquipoActual.Name = "groupBoxEquipoActual";
             groupBoxEquipoActual.Size = new Size(245, 349);
             groupBoxEquipoActual.TabIndex = 3;
@@ -176,12 +182,12 @@
             // 
             // groupBoxArbitros
             // 
-            groupBoxArbitros.Controls.Add(label1);
+            groupBoxArbitros.Controls.Add(lblNroCarnetArbitro);
             groupBoxArbitros.Controls.Add(lblAgregarArbitro);
             groupBoxArbitros.Controls.Add(lblDNIArbitro);
             groupBoxArbitros.Controls.Add(lblNombreApellidoArbitro);
             groupBoxArbitros.Controls.Add(listBoxArbitros);
-            groupBoxArbitros.Location = new Point(389, 35);
+            groupBoxArbitros.Location = new Point(521, 40);
             groupBoxArbitros.Name = "groupBoxArbitros";
             groupBoxArbitros.Size = new Size(284, 154);
             groupBoxArbitros.TabIndex = 6;
@@ -189,14 +195,14 @@
             groupBoxArbitros.Text = "Lista de Árbitros";
             groupBoxArbitros.Enter += groupBoxArbitros_Enter;
             // 
-            // label1
+            // lblNroCarnetArbitro
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(132, 67);
-            label1.Name = "label1";
-            label1.Size = new Size(118, 15);
-            label1.TabIndex = 3;
-            label1.Text = "N° Carnet: nroCarnet";
+            lblNroCarnetArbitro.AutoSize = true;
+            lblNroCarnetArbitro.Location = new Point(132, 67);
+            lblNroCarnetArbitro.Name = "lblNroCarnetArbitro";
+            lblNroCarnetArbitro.Size = new Size(118, 15);
+            lblNroCarnetArbitro.TabIndex = 3;
+            lblNroCarnetArbitro.Text = "N° Carnet: nroCarnet";
             // 
             // lblDNIArbitro
             // 
@@ -224,6 +230,7 @@
             listBoxArbitros.Name = "listBoxArbitros";
             listBoxArbitros.Size = new Size(120, 124);
             listBoxArbitros.TabIndex = 0;
+            listBoxArbitros.SelectedIndexChanged += listBoxArbitros_SelectedIndexChanged;
             // 
             // groupBoxDTs
             // 
@@ -232,7 +239,7 @@
             groupBoxDTs.Controls.Add(lblAgregarDT);
             groupBoxDTs.Controls.Add(lblNombreYApellidoDT);
             groupBoxDTs.Controls.Add(listBoxDTs);
-            groupBoxDTs.Location = new Point(389, 195);
+            groupBoxDTs.Location = new Point(521, 200);
             groupBoxDTs.Name = "groupBoxDTs";
             groupBoxDTs.Size = new Size(284, 154);
             groupBoxDTs.TabIndex = 7;
@@ -274,10 +281,11 @@
             listBoxDTs.Name = "listBoxDTs";
             listBoxDTs.Size = new Size(120, 124);
             listBoxDTs.TabIndex = 0;
+            listBoxDTs.SelectedIndexChanged += listBoxDTs_SelectedIndexChanged;
             // 
             // btnGuardarTodo
             // 
-            btnGuardarTodo.Location = new Point(584, 362);
+            btnGuardarTodo.Location = new Point(730, 362);
             btnGuardarTodo.Name = "btnGuardarTodo";
             btnGuardarTodo.Size = new Size(89, 23);
             btnGuardarTodo.TabIndex = 8;
@@ -285,11 +293,66 @@
             btnGuardarTodo.UseVisualStyleBackColor = true;
             btnGuardarTodo.Click += btnGuardarTodo_Click;
             // 
+            // btnVerEquipos
+            // 
+            btnVerEquipos.Location = new Point(365, 5);
+            btnVerEquipos.Name = "btnVerEquipos";
+            btnVerEquipos.Size = new Size(80, 23);
+            btnVerEquipos.TabIndex = 9;
+            btnVerEquipos.Text = "Ver Equipos";
+            btnVerEquipos.UseVisualStyleBackColor = true;
+            btnVerEquipos.Click += button1_Click;
+            // 
+            // btnVerJugadores
+            // 
+            btnVerJugadores.Location = new Point(451, 5);
+            btnVerJugadores.Name = "btnVerJugadores";
+            btnVerJugadores.Size = new Size(90, 23);
+            btnVerJugadores.TabIndex = 10;
+            btnVerJugadores.Text = "Ver Jugadores";
+            btnVerJugadores.UseVisualStyleBackColor = true;
+            btnVerJugadores.Click += btnVerJugadores_Click;
+            // 
+            // btnVerArbitros
+            // 
+            btnVerArbitros.Location = new Point(547, 5);
+            btnVerArbitros.Name = "btnVerArbitros";
+            btnVerArbitros.Size = new Size(77, 23);
+            btnVerArbitros.TabIndex = 11;
+            btnVerArbitros.Text = "Ver Árbitros";
+            btnVerArbitros.UseVisualStyleBackColor = true;
+            btnVerArbitros.Click += btnVerArbitros_Click;
+            // 
+            // btnVerDTs
+            // 
+            btnVerDTs.Location = new Point(630, 5);
+            btnVerDTs.Name = "btnVerDTs";
+            btnVerDTs.Size = new Size(75, 23);
+            btnVerDTs.TabIndex = 12;
+            btnVerDTs.Text = "Ver DTs";
+            btnVerDTs.UseVisualStyleBackColor = true;
+            btnVerDTs.Click += btnVerDTs_Click;
+            // 
+            // btnVerGoleadores
+            // 
+            btnVerGoleadores.Location = new Point(711, 5);
+            btnVerGoleadores.Name = "btnVerGoleadores";
+            btnVerGoleadores.Size = new Size(94, 23);
+            btnVerGoleadores.TabIndex = 13;
+            btnVerGoleadores.Text = "Ver Goleadores";
+            btnVerGoleadores.UseVisualStyleBackColor = true;
+            btnVerGoleadores.Click += btnVerGoleadores_Click;
+            // 
             // Principal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(685, 397);
+            ClientSize = new Size(831, 397);
+            Controls.Add(btnVerGoleadores);
+            Controls.Add(btnVerDTs);
+            Controls.Add(btnVerArbitros);
+            Controls.Add(btnVerJugadores);
+            Controls.Add(btnVerEquipos);
             Controls.Add(btnGuardarTodo);
             Controls.Add(groupBoxDTs);
             Controls.Add(groupBoxArbitros);
@@ -324,7 +387,7 @@
         private Button lblAgregarDT;
         private Button lblAgregarArbitro;
         private GroupBox groupBoxArbitros;
-        private Label label1;
+        private Label lblNroCarnetArbitro;
         private Label lblDNIArbitro;
         private Label lblNombreApellidoArbitro;
         private ListBox listBoxArbitros;
@@ -334,5 +397,10 @@
         private Label lblNombreYApellidoDT;
         private ListBox listBoxDTs;
         private Button btnGuardarTodo;
+        private Button btnVerEquipos;
+        private Button btnVerJugadores;
+        private Button btnVerArbitros;
+        private Button btnVerDTs;
+        private Button btnVerGoleadores;
     }
 }

@@ -36,5 +36,16 @@ namespace Negocio
 
         }
 
+        public static string ObtenerNombreDT (int dni)
+                    {
+            foreach (DirectorTecnico dt in ListaDT)
+            {
+                if (dt.DNI == dni)
+                {
+                    return dt.Nombre + " " + dt.Apellido;
+                }
+            }
+            return "No encontrado";
+        }
     }
 }
